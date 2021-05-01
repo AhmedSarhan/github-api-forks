@@ -1,0 +1,39 @@
+@import './abstracts/mixins';
+@import './abstracts/utilties';
+@import './abstracts/variables';
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: lato;
+}
+
+ul {
+  list-style: none;
+}
+
+.btnSubmit {
+  background-color: $dark-primary;
+  border: 1px solid $golden_yellow;
+  border-radius: 40px;
+  color: $golden_yellow;
+  font-size: 1.4rem;
+  padding: 5px 10px;
+  margin: 5px;
+
+}
+
+a:link {
+  text-decoration: none;
+}

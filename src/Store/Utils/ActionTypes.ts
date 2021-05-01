@@ -1,0 +1,6 @@
+export const ActionTypes = {
+  ADD_TO_FAV: "ADD_TO_FAV",
+  DELETE_FROM_FAV: "DELETE_FROM_FAV",
+  FETCH_FAVS: "FETCH_FAVS",
+  FETCH_REPOS: "FETCH_REPOS"
+}

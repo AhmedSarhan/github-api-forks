@@ -1,25 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import './App.scss';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import '@fortawesome/fontawesome-free/css/all.css';
+import { ActionTypes } from './Store/Utils/ActionTypes';
+import { useDispatch } from "react-redux";
+import { Dispatch } from 'redux'
 
+import Home from './pages/Home';
+import Search from './pages/Search';
+import Favorites from './pages/Favorites';
+import axios from 'axios'
 function App() {
+  const dispatch: Dispatch<any> = useDispatch()
+  useEffect(() => {
+    axios.get(`https://nuxt-blog-4711b.firebaseio.com/favs.json`)
+      .then(res => {
+        let favorites = []
+        for (let key in res.data) {
+          favorites.push({ ...res.data[key], fav: true })
+        }
+        dispatch({
+          type: ActionTypes.FETCH_FAVS,
+          payload: favorites
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    dispatch({
+      type: ActionTypes.FETCH_FAVS
+    })
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" >
+          <Home />
+        </Route>
+        <Route path="/search" >
+          <Search />
+        </Route>
+        <Route path="/favorites" >
+          <Favorites />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

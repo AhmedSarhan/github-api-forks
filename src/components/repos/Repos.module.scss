@@ -1,0 +1,97 @@
+@import '../../abstracts/variables';
+
+.repoList {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media screen and (max-width: 700px) {
+  .repoList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .repoList {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+.repoCard {
+  margin: 20px auto;
+  padding: 16px;
+  border-radius: 5px;
+  border: 1px solid $dark-border-primary;
+  background-color: $dark-primary;
+  color: $dark-secondary;
+  max-width: 100%;
+  width: 80%;
+  position: relative;
+
+  button {
+    position: absolute;
+    right: 10px;
+    top: 17px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    i {
+      color: $golden-yellow;
+      font-size: 1.4em;
+      margin: 0;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  i {
+    margin-right: 3px;
+  }
+
+  a.repoName {
+    color: #6c5ce7;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .ownerAvatar {
+    max-width: 50px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+  }
+
+  p.ownerName {
+    font-size: 1.5em;
+    color: white;
+  }
+
+  .topic {
+    margin-left: 5px;
+
+    .circularIcon {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid $dark-border-primary;
+
+    }
+
+    span {
+      margin-left: 2px;
+      margin-right: 2px;
+      font-size: 1.3em;
+    }
+  }
+
+  .details {
+    font-size: 1.3em;
+
+  }
+}
