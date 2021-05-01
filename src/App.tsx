@@ -12,6 +12,7 @@ import Favorites from './pages/Favorites';
 import axios from 'axios'
 function App() {
   const dispatch: Dispatch<any> = useDispatch()
+  // rememner moving the link to .env
   useEffect(() => {
     axios.get(`https://nuxt-blog-4711b.firebaseio.com/favs.json`)
       .then(res => {
