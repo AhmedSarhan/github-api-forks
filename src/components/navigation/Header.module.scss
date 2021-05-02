@@ -10,6 +10,7 @@
   background-color: $dark-primary;
   color: $dark-secondary;
   font-size: 2rem;
+  flex-direction: row;
 
   a:link,
   a:visited {
@@ -45,4 +46,12 @@
   }
 
 
+}
+
+
+
+@media screen and (max-width: 400px) {
+  .header {
+    flex-direction: column;
+  }
 }

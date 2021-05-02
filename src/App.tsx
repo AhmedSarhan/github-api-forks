@@ -10,11 +10,13 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Favorites from './pages/Favorites';
 import axios from 'axios'
+
 function App() {
   const dispatch: Dispatch<any> = useDispatch()
+  const privateDBUri: string = (process.env.REACT_APP_PRIVATE_DB as string);
   // rememner moving the link to .env
   useEffect(() => {
-    axios.get(`https://nuxt-blog-4711b.firebaseio.com/favs.json`)
+    axios.get(privateDBUri)
       .then(res => {
         let favorites = []
         for (let key in res.data) {
