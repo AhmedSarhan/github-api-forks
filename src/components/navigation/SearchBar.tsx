@@ -19,7 +19,7 @@ const SearchBar = () => {
   const searchHandler = (data: searchData) => {
     let owner = data.query.split('/')[0]
     let repoName = data.query.split('/')[1]
-    fetch(`/repos/${owner}/${repoName}/forks`)
+    fetch(`https://api.github.com/repos/${owner}/${repoName}/forks`)
       .then(response => response.json())
       .then(data => {
         dispatch({
