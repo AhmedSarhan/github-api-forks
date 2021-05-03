@@ -59,14 +59,14 @@ const RepoCard = ({ repo }: { repo: RepoType }) => {
           type: ActionTypes.DELETE_FROM_FAV,
           payload: repo
         })
-        toast.info(`${repo?.name} was removed from your favorites successfully`, {
-          position: "top-right",
+        toast.warn(`${repo?.name} was removed from your favorites successfully`, {
+          position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: false,
-          progress: 0.5,
+          progress: undefined,
         });
       })
   }
@@ -79,13 +79,13 @@ const RepoCard = ({ repo }: { repo: RepoType }) => {
           payload: repo
         });
         toast.success(`${repo?.name} was added to your favorites successfully`, {
-          position: "top-right",
+          position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: false,
-          progress: 0.5,
+          progress: undefined,
         });
 
       })

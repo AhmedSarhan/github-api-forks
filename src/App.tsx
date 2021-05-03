@@ -5,7 +5,6 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import { ActionTypes } from './Store/Utils/ActionTypes';
 import { useDispatch } from "react-redux";
 import { Dispatch } from 'redux'
-
 import Home from './pages/Home';
 import Search from './pages/Search';
 import Favorites from './pages/Favorites';
@@ -48,6 +47,7 @@ function App() {
           <Favorites />
         </Route>
       </Switch>
+
     </BrowserRouter>
   );
 }
