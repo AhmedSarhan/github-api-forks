@@ -1,0 +1,51 @@
+@import '../abstracts/variables';
+
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(45deg);
+
+  }
+
+  50% {
+    transform: rotate(90deg);
+
+  }
+
+  75% {
+    transform: rotate(180deg);
+
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+.mainLogo {
+  font-size: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  color: $secondary-color;
+  // animation: rotate 1.5s 0s infinite;
+  animation: rotation 2s infinite;
+
+}

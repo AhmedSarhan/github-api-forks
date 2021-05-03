@@ -1,0 +1,69 @@
+@import '../abstracts/variables';
+
+.container {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.page {
+  padding: 10px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+
+}
+
+.disabled {
+  a {
+    cursor: not-allowed;
+    border-radius: 50%;
+    background: $primary-color;
+    color: $secondary-color;
+    box-shadow: none;
+    border: none;
+  }
+
+}
+
+.active {
+  border: 1px solid #000;
+  font-weight: bold;
+}
+
+.previous {
+  padding: 10px;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+
+  a {
+    border-radius: 50%;
+    background: $primary-color;
+    color: $secondary-color;
+    box-shadow: none;
+    border: none;
+  }
+}
+
+.break {
+  padding: 10px;
+}
+
+.next {
+  padding: 10px;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+
+  a {
+    border-radius: 50%;
+    background: $primary-color;
+    color: $secondary-color;
+    box-shadow: none;
+    border: none;
+  }
+}

@@ -1,10 +1,11 @@
 import React from 'react'
+import clsx from 'clsx'
 import PageLayout from './../layouts/PageLayout';
-
+import styles from './home.module.scss'
 const Home = () => {
   return (
     <PageLayout>
-      <h3>Home Page</h3>
+      <i className={clsx(styles.mainLogo, "fab fa-github-alt")}></i>
     </PageLayout>
   )
 }

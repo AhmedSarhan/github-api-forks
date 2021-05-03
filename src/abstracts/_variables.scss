@@ -1,6 +1,34 @@
 // dark theme
-$dark-primary : #2d3436;
-$dark-secondary: #f4f4f4;
-$dark-border-primary: #30363d;
+
+.lightTheme {
+  --primary: #f4f4f4;
+  --secondary: #2d3436;
+  --border-primary: #fff;
+}
+
+.darkTheme {
+  --primary: #2d3436;
+  --secondary: #f4f4f4;
+  --border-primary: #30363d;
+}
+
+$primary-color : var(--primary);
+$secondary-color: var(--secondary);
+$border-primary-color: var(--border-primary);
 
 $golden_yellow: #f5c518;
+
+@mixin theme($name) {
+  $primary: $color;
+  $secondary: lighten(adjust-hue($color, 20), 10%);
+
+  .#{$name} {
+    .element {
+      color: $primary;
+    }
+
+    .other-element {
+      background: $secondary;
+    }
+  }
+}

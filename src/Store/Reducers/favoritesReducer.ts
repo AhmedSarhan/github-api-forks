@@ -3,7 +3,9 @@ import { ActionTypes } from './../Utils/ActionTypes';
 
 const initalState: ReducerStateType = {
   repoList: [],
-  favoritesList: []
+  favoritesList: [],
+  currentPage: 1,
+  currentTheme: "light"
 }
 export const FavsReducer = (state: ReducerStateType = initalState, action: Action) => {
   switch (action.type) {
@@ -60,7 +62,18 @@ export const FavsReducer = (state: ReducerStateType = initalState, action: Actio
         repoList: [...newRepoList]
 
       }
+
     }
+    case ActionTypes.CHANGE_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload
+      }
+    case ActionTypes.CHANGE_THEME:
+      return {
+        ...state,
+        currentTheme: action.payload
+      }
     default:
       return state;
   }

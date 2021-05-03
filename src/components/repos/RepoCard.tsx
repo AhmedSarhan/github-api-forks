@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import { RepoType } from '../../utils/types/ReposType'
 import styles from './Repos.module.scss'
@@ -7,9 +7,10 @@ import axios from 'axios'
 import { Dispatch } from 'redux'
 import { useDispatch } from 'react-redux';
 import { ActionTypes } from './../../Store/Utils/ActionTypes';
+import { toast } from 'react-toastify';
 const RepoCard = ({ repo }: { repo: RepoType }) => {
   const dispatch: Dispatch<any> = useDispatch()
-  const [faved, setFaved] = useState<boolean | undefined>(repo?.fav)
+  const [faved, setFaved] = useState<boolean | undefined>(undefined)
   const [hoveredState, setHoveredState] = useState<boolean>(false)
   const circleStyles = [
     {
@@ -44,6 +45,11 @@ const RepoCard = ({ repo }: { repo: RepoType }) => {
       }
     },
   ]
+  useEffect(() => {
+    console.log('it is running')
+    console.log(repo.fav)
+    setFaved(repo.fav)
+  }, [repo?.fav])
   let circleStyle = circleStyles[Math.floor(Math.random() * (circleStyles.length - 0))].style
   const removeFromFavsHandler = () => {
     axios.delete(`https://nuxt-blog-4711b.firebaseio.com/favs/${repo.id}.json`,)
@@ -53,6 +59,15 @@ const RepoCard = ({ repo }: { repo: RepoType }) => {
           type: ActionTypes.DELETE_FROM_FAV,
           payload: repo
         })
+        toast.info(`${repo?.name} was removed from your favorites successfully`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: 0.5,
+        });
       })
   }
   const addToFavsHandler = () => {
@@ -62,22 +77,34 @@ const RepoCard = ({ repo }: { repo: RepoType }) => {
         dispatch({
           type: ActionTypes.ADD_TO_FAV,
           payload: repo
-        })
+        });
+        toast.success(`${repo?.name} was added to your favorites successfully`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: 0.5,
+        });
+
       })
   }
   return (
     <>
       <motion.div animate={{
         scale: hoveredState ? 1.2 : 1,
-        boxShadow: hoveredState ? '-3px 3px 36px -1px rgba(0,0,0,0.75)' : 'none'
+        boxShadow: hoveredState ?
+          '-3px 3px 36px -1px rgba(0,0,0,0.75)'
+          : '1px 2px 4px 1px rgba(0, 0, 0, 0.4)'
       }}
         transition={{ ease: "easeOut", duration: 0.5 }}
         className={styles.repoCard}
         onMouseEnter={() => setHoveredState(true)}
         onMouseLeave={() => setHoveredState(false)}
       >
-        <button onMouseEnter={() => setFaved(prev => !prev)}
-          onMouseLeave={() => setFaved(prev => !prev)}
+        <button
+
           onClick={repo.fav ? removeFromFavsHandler : addToFavsHandler}
         >
           {faved ? <i className="fas fa-star"></i> : <i className="far fa-star"></i>}

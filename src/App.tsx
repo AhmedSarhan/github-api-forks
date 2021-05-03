@@ -14,6 +14,7 @@ import axios from 'axios'
 function App() {
   const dispatch: Dispatch<any> = useDispatch()
   const privateDBUri: string = (process.env.REACT_APP_PRIVATE_DB as string);
+
   // rememner moving the link to .env
   useEffect(() => {
     axios.get(privateDBUri)

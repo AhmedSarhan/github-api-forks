@@ -25,7 +25,7 @@ const Favorites = () => {
   const favList: RepoType[] = useSelector((state: ReducerStateType) => state.favoritesList)
   return (
     <PageLayout>
-      <h3>Fav list</h3>
+      <h3 className="text-center page-title">Fav list</h3>
       {favList && favList.length > 0 ? <ReposList repos={favList} /> :
         <h5 className="my-4 text-center">There are no favorites yet</h5>
       }

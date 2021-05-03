@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import styles from './Header.module.scss';
 import { ActionTypes } from './../../Store/Utils/ActionTypes';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from 'redux'
 import { useHistory } from 'react-router-dom'
-
+import axios from 'axios';
+import { ReducerStateType } from '../../Store/Utils/storeTypes';
 interface searchData {
   query: string
 }
@@ -15,16 +16,27 @@ const SearchBar = () => {
     reValidateMode: 'onBlur'
   })
   const history = useHistory()
-  const dispatch: Dispatch<any> = useDispatch()
+  const dispatch: Dispatch<any> = useDispatch();
+  const initialRun = useRef(false);
+  const currentPage: number = useSelector((state: ReducerStateType) => state.currentPage)
+  const [searchQuery, setSearchQuery] = useState<searchData>({
+    query: ""
+  })
   const searchHandler = (data: searchData) => {
+    setSearchQuery(data)
     let owner = data.query.split('/')[0]
     let repoName = data.query.split('/')[1]
-    fetch(`https://api.github.com/repos/${owner}/${repoName}/forks`)
-      .then(response => response.json())
-      .then(data => {
+
+    axios.get(`https://api.github.com/repos/${owner}/${repoName}/forks`, {
+      params: {
+        page: currentPage,
+        per_page: 30
+      }
+    })
+      .then(res => {
         dispatch({
           type: ActionTypes.FETCH_REPOS,
-          payload: data
+          payload: res?.data
         })
       })
       .catch(err => {
@@ -33,6 +45,16 @@ const SearchBar = () => {
 
     history.push(`/search`)
   }
+  useEffect(() => {
+    console.log(initialRun.current)
+    if (initialRun.current) {
+      console.log(currentPage)
+      searchHandler(searchQuery);
+      return
+    }
+    console.log('first')
+    initialRun.current = true
+  }, [currentPage])
   return (
     <form onSubmit={handleSubmit(searchHandler)}>
       <div className="flex justify-space-around items-center w-full">
